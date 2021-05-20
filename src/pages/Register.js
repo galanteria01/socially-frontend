@@ -1,8 +1,10 @@
 import { useMutation } from '@apollo/client'
 import gql from 'graphql-tag'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Button, Container, Form, Header } from 'semantic-ui-react'
-import { useForm } from '../utils/hooks'
+import { useForm } from '../utils/hooks';
+import { AuthContext } from '../context/auth'
+
 
 const Register = (props) => {
 
