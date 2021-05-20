@@ -2,26 +2,27 @@ import { useMutation } from '@apollo/client'
 import gql from 'graphql-tag'
 import React, { useState } from 'react'
 import { Button, Container, Form, Header } from 'semantic-ui-react'
+import { useForm } from '../utils/hooks'
 
-const Register = () => {
+const Register = (props) => {
 
     const [errors, setErrors] = useState({});
 
-    const [values,setValues] = useState({
+    const context = useContext(AuthContext);
+
+    const initialState = {
         username: '',
         email: '',
         password: '',
         confirmPassword: ''
-    })
+    };
 
-    const onChange = (e) => {
-        setValues({
-            ...values,[e.target.name]: e.target.value
-        })
-    }
+    const {onChange, onSubmit, values } = useForm(registerUser, initialState);
+
     const [addUser, {loading}] = useMutation(REGISTER_USER, {
-        update(proxy,result){
-            console.log(result);
+        update(_,{ data: { register: userData } }){
+            context.login(userData);
+            props.history.push('/');
         },
         onError(err){
             setErrors(err.graphQLErrors[0].extensions.exception.errors)
@@ -29,10 +30,7 @@ const Register = () => {
         variables: values
     })
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-        addUser();
-    }
+    function registerUser(){addUser()}
 
     
 
@@ -49,6 +47,7 @@ const Register = () => {
                 type="text"
                 value={values.username}
                 onChange={onChange}
+                error={errors.username? true : false}
                 />
                 <Form.Input
                 label="Email"
@@ -57,6 +56,7 @@ const Register = () => {
                 type="email"
                 value={values.email}
                 onChange={onChange}
+                error={errors.email? true : false}
                 />
                 <Form.Input
                 label="Password"
@@ -65,6 +65,7 @@ const Register = () => {
                 type="password"
                 value={values.passsword}
                 onChange={onChange}
+                error={errors.password? true : false}
                 />
                 <Form.Input
                 label="Confirm password"
@@ -73,6 +74,7 @@ const Register = () => {
                 type="password"
                 value={values.confirmPassword}
                 onChange={onChange}
+                error={errors.confirmPassword? true : false}
                 />
                 <Button type="submit" primary>
                     Register
