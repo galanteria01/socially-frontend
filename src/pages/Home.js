@@ -1,7 +1,7 @@
 import React from 'react'
 import {useQuery} from '@apollo/react-hooks';
 import gql from 'graphql-tag'
-import { Grid } from 'semantic-ui-react';
+import { Grid, Header } from 'semantic-ui-react';
 import PostCard from '../components/PostCard';
 
 const Home = () => {
@@ -11,8 +11,8 @@ const Home = () => {
     
     return (
         <Grid columns={3}>
-            <Grid.Row>
-                <h1>Recent Posts</h1>
+            <Grid.Row style={{display:'flex', justifyContent: 'center', marginTop: 10}}>
+                <h2>Recent posts</h2>
             </Grid.Row>
             <Grid.Row>
                 {loading ? ( <h1>Loading posts</h1> ) : (
