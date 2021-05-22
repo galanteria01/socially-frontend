@@ -1,17 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Button, Card, Icon, Image, Label } from 'semantic-ui-react'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../context/auth'
+import LikeButton from './LikeButton'
 
 const PostCard = ({post: {body, createdAt, username, id, likeCount, commentCount, likes}}) => {
 
-    const likePost = () => {
-
-    }
-
-    const commentOnPost = () => {
-        console.log("Comment on post")
-    }
+    const { user } = useContext(AuthContext);
 
     return (
         <Card fluid>
@@ -28,22 +24,25 @@ const PostCard = ({post: {body, createdAt, username, id, likeCount, commentCount
                 </Card.Description>
             </Card.Content>
             <Card.Content extra>
-                <Button as='div' labelPosition='right'>
-                    <Button color='teal' basic>
-                        <Icon name='heart' />
-                    </Button>
-                    <Label as='a' basic color='teal' pointing='left' onClick={likePost}>
-                        {likeCount}
-                    </Label>
-                </Button>
+                <LikeButton user={user} post={{id, likes, likeCount}} />
                 <Button as='div' labelPosition='right'>
                     <Button basic color='blue'>
                         <Icon name='comments' />
                     </Button>
-                    <Label as='a' basic color='blue' pointing='left' onClick={commentOnPost}>
+                    <Label as='a' basic color='blue' pointing='left' as={Link} to={`/posts/${id}`} >
                         {commentCount}
                     </Label>
                 </Button>
+
+                {user && user.username === username && 
+                    (
+                        <Button as='div' labelPosition='right' floated='right'>
+                            <Button color='red'>
+                                <Icon name='trash' style={{margin: 0}} />
+                            </Button>
+                        </Button> 
+                    )
+                }
             </Card.Content>
         </Card>
     )
