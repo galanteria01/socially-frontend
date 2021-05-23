@@ -12,18 +12,25 @@ const SinglePost = (props) => {
 
     const {user} = useContext(AuthContext);
 
-    const {data: {getPost}} = useQuery(POST_QUERY, {
+    const {loading, data = {}
+      } = useQuery(POST_QUERY, {
         variables: {
-            postId
+          postId
         }
-    })
+      });
+    const deletePostCallback = () => {
+        props.history.push('/');
+    }
+
+    
+    
 
     let postMarkup;
 
-    if(!getPost){
+    if(loading){
         postMarkup = (<p>Loading Post...</p>)
     }else{
-        const { id, body, createdAt, username, comments, likes, likeCount, commentCount } = getPost;
+        const { id, body, createdAt, username, comments, likes, likeCount, commentCount } = data.getPost;
         postMarkup = (
             <Grid>
                 <Grid.Row>
@@ -57,7 +64,7 @@ const SinglePost = (props) => {
                                             {commentCount}
                                         </Label>
                                     </Button>
-                                    {user && user.username === username && <DeleteButton postId={{id}} />}
+                                    {user && user.username === username && <DeleteButton postId={id} callback={deletePostCallback} />}
                                 </Card.Content>
                             </Card.Content>
                         </Card>
@@ -70,7 +77,7 @@ const SinglePost = (props) => {
 
     return (
         <div>
-            
+            {postMarkup}
         </div>
     )
 }
@@ -78,13 +85,20 @@ const SinglePost = (props) => {
 const POST_QUERY = gql`
     query($postId: ID!) {
         getPost(postId: $postId ){
-            id body createdAt username likeCount 
+            id 
+            body 
+            createdAt 
+            username 
+            likeCount 
             likes{
                 username
             }
             commentCount
             comments{
-                id username createdAt body
+                id 
+                username 
+                createdAt 
+                body
             }
         }
     }

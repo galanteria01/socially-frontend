@@ -32,7 +32,6 @@ const Login = (props) => {
     })
 
     function loginUserCallback(){
-        console.log(values);
         loginUser()
     }
 
