@@ -7,7 +7,7 @@ import App from './App';
 import { setContext } from 'apollo-link-context';
 
 const httpLink = createHttpLink({
-    uri: 'http://localhost:5001'
+    uri: 'https://warm-citadel-46719.herokuapp.com/'
 })
 
 const authLink = setContext(() => {
