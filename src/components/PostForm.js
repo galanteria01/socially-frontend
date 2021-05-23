@@ -1,10 +1,9 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
-import React, { useContext } from 'react'
+import React from 'react'
 import { Button, Form } from 'semantic-ui-react'
 import {useForm} from '../utils/hooks';
 import {FETCH_POSTS_QUERY} from '../utils/graphql';
-import { AuthContext } from '../context/auth';
 
 const PostForm = () => {
 

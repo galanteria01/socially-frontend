@@ -17,7 +17,7 @@ const DeleteButton = ({postId, commentId, callback}) => {
                 const data = proxy.readQuery({
                     query: FETCH_POSTS_QUERY
                 });
-                const newPosts = data.getPosts.filter(p => p.id != postId);
+                const newPosts = data.getPosts.filter(p => p.id !== postId);
                 proxy.writeQuery({
                     query: FETCH_POSTS_QUERY, 
                     data: {

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom';
-import { Menu, Segment } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react'
 import { AuthContext } from '../context/auth';
 
 const MenuBar = () => {
@@ -11,7 +11,7 @@ const MenuBar = () => {
 
     const handleItemClick = (e, { name }) => setActive(name)
 
-    const { user, logout } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
     return (
         user ?
