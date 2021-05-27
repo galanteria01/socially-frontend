@@ -36,12 +36,12 @@ const PostForm = () => {
             <Form onSubmit={onSubmit}>
                 <h2>Create a post</h2>
                 <Form.Field>
-                    <Form.Input 
-                    placeholder="Hello world" 
-                    name="body" 
-                    onChange={onChange} 
-                    value={values.body} 
-                    error= {error ? true : false}
+                    <Form.TextArea
+                    onChange={onChange}
+                    name="body"
+                    placeholder="Create your post"
+                    value={values.body}
+                    style={{minHeight: 100, borderRadius: 10}}
                     />
                     <Button type="submit" color="teal">
                         Submit post

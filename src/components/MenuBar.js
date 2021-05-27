@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom';
-import { Menu } from 'semantic-ui-react'
+import { Icon, Menu } from 'semantic-ui-react'
 import { AuthContext } from '../context/auth';
 
 const MenuBar = () => {
@@ -17,21 +17,36 @@ const MenuBar = () => {
         user ?
             <Menu pointing secondary size="massive" color="green">
                 <Menu.Item
-                    name={user.username}
+                    name="home"
                     active={active === 'home'}
                     onClick={handleItemClick}
                     as={Link}
                     to="/"
-                />
+                >
+                    <Icon name="home" />
+                    Home
+                </Menu.Item>
                 
                 <Menu.Menu position='right'>
                     <Menu.Item
-                        name='Logout'
-                        active={active === 'register'}
+                        name={user.username}
+                        onClick={handleItemClick}
+                        as={Link}
+                        to="/"
+                    >
+                        <Icon name="user"/>
+                        {user.username}
+                    </Menu.Item>
+                    <Menu.Item
+                        name='logout'
+                        active={active === 'logout'}
                         onClick={handleItemClick}
                         as={Link}
                         to="/login"
-                    />
+                    >
+                        <Icon name="sign out alternate icon"></Icon>
+                        Logout
+                    </Menu.Item>
                 </Menu.Menu>
             </Menu>
             : 
@@ -42,7 +57,10 @@ const MenuBar = () => {
                     onClick={handleItemClick}
                     as={Link}
                     to="/"
-                />
+                >
+                    <Icon name="home" />
+                    Home
+                </Menu.Item>
                 
                 <Menu.Menu position='right'>
                     <Menu.Item
@@ -51,14 +69,22 @@ const MenuBar = () => {
                         onClick={handleItemClick}
                         as={Link}
                         to="/login"
-                    />
+                    >
+                        <Icon name="home" />
+                    Login
+
+                    </Menu.Item>
                     <Menu.Item
                         name='register'
                         active={active === 'register'}
                         onClick={handleItemClick}
                         as={Link}
                         to="/register"
-                    />
+                    >
+                        <Icon name="home" />
+                    Register
+
+                    </Menu.Item>
                 </Menu.Menu>
             </Menu>
             

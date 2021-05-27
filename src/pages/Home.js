@@ -13,7 +13,7 @@ const Home = () => {
 
     
     return (
-        <Grid columns={3}>
+        <Grid columns={1}>
             <Grid.Row style={{display:'flex', justifyContent: 'center', marginTop: 10}}>
                 <h2>Recent posts</h2>
             </Grid.Row>
