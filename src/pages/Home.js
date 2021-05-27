@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import {useQuery} from '@apollo/react-hooks';
-import { Grid, Header, Transition } from 'semantic-ui-react';
+import { Dimmer, Grid, Header, Loader, Transition } from 'semantic-ui-react';
 import PostCard from '../components/PostCard';
 import { AuthContext } from "../context/auth"
 import PostForm from '../components/PostForm';
@@ -24,7 +24,9 @@ const Home = () => {
                 </Grid.Column>
             ) }
             <Grid.Row>
-                {loading ? ( <h1>Loading posts</h1> ) : (
+                {loading ? ( <Dimmer active inverted>
+                                <Loader inverted>Loading</Loader>
+                            </Dimmer> ) : (
                     <Transition.Group>
                         {posts && posts.map(post => (
                             <Grid.Column key={post.id} style={{marginBottom: 10}}>

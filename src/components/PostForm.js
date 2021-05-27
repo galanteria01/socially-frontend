@@ -4,6 +4,7 @@ import React from 'react'
 import { Button, Form } from 'semantic-ui-react'
 import {useForm} from '../utils/hooks';
 import {FETCH_POSTS_QUERY} from '../utils/graphql';
+import MenuAddMedia from './MenuAddMedia';
 
 const PostForm = () => {
 
@@ -43,6 +44,7 @@ const PostForm = () => {
                     value={values.body}
                     style={{minHeight: 100, borderRadius: 10}}
                     />
+                    <MenuAddMedia />
                     <Button type="submit" color="teal">
                         Submit post
                     </Button>

@@ -10,8 +10,15 @@ const MenuBar = () => {
     const [active, setActive] = useState(path);
 
     const handleItemClick = (e, { name }) => setActive(name)
+    
+    const logUserOut = () => {
+        handleItemClick();
+        logout();
+        
+    }
 
-    const { user } = useContext(AuthContext);
+
+    const { user, logout } = useContext(AuthContext);
 
     return (
         user ?
@@ -40,7 +47,7 @@ const MenuBar = () => {
                     <Menu.Item
                         name='logout'
                         active={active === 'logout'}
-                        onClick={handleItemClick}
+                        onClick={logUserOut}
                         as={Link}
                         to="/login"
                     >
@@ -70,7 +77,8 @@ const MenuBar = () => {
                         as={Link}
                         to="/login"
                     >
-                        <Icon name="home" />
+                        <Icon name="sign-in" />
+                        
                     Login
 
                     </Menu.Item>
@@ -81,7 +89,7 @@ const MenuBar = () => {
                         as={Link}
                         to="/register"
                     >
-                        <Icon name="home" />
+                        <Icon name="user plus" />
                     Register
 
                     </Menu.Item>
